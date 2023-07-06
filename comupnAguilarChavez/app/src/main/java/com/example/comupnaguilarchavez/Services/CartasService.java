@@ -1,6 +1,8 @@
 package com.example.comupnaguilarchavez.Services;
 
 import com.example.comupnaguilarchavez.Entities.Cartas;
+import com.example.comupnaguilarchavez.Entities.ImageResponse;
+import com.example.comupnaguilarchavez.Entities.ImageToSave;
 
 import java.util.List;
 
@@ -30,5 +32,5 @@ public interface CartasService {
     Call<Void> delete(@Path("id") int id);
 
     @POST("image")
-    Call<Cartas> subirImagen(@Body Cartas imagen);
+    Call<ImageResponse> subirImagen(@Body ImageToSave imagen);
 }

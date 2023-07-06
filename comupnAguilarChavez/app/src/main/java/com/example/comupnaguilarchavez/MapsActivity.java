@@ -4,6 +4,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 
+import com.example.comupnaguilarchavez.BD.AppDatabase;
+import com.example.comupnaguilarchavez.Entities.Cartas;
+import com.example.comupnaguilarchavez.Repositories.CartasRepository;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -16,10 +19,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+    Cartas carta = new Cartas(); //crear pokemon
+    private double latitud;
+    private double longitud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        int position = getIntent().getIntExtra("position", 0);
+
+        //Crear mapa en BD
+        AppDatabase db = AppDatabase.getInstance(this);
+        CartasRepository repository = db.cartitasRepository();
+        carta = repository.findCartaById(position);
+
+        if(carta!= null){
+            latitud = Double.parseDouble(carta.getLatitud());
+            longitud = Double.parseDouble(carta.getLongitud());
+
+            binding = ActivityMapsBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+
+            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+        }
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -44,8 +70,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        LatLng sydney = new LatLng(latitud, longitud);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Has encontrado: " + carta.getNombre()));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

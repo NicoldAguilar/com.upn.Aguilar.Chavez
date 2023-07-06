@@ -116,6 +116,11 @@ import retrofit2.Retrofit;
 
                         Cartas aux = new Cartas();
                         aux.setNombre(cartas.get(i).getNombre());
+                        aux.setPuntosAtaque(cartas.get(i).getPuntosAtaque());
+                        aux.setPuntosDefensa(cartas.get(i).getPuntosDefensa());
+                        aux.setFoto(cartas.get(i).getFoto());
+                        aux.setLatitud(cartas.get(i).getLatitud());
+                        aux.setLongitud(cartas.get(i).getLongitud());
 
                         aux.setSynced(true);
 
