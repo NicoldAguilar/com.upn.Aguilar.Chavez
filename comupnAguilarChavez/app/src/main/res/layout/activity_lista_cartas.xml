@@ -17,26 +17,26 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvListaSimple2"
+                android:id="@+id/rvListaSimple3"
                 android:layout_width="match_parent"
                 android:layout_height="620dp" />
 
             <Button
-                android:id="@+id/btnActualizar2"
+                android:id="@+id/btnActualizar3"
                 android:layout_width="match_parent"
                 android:layout_height="127dp"
                 android:layout_weight="1"
                 android:text="Actualizar" />
 
             <Button
-                android:id="@+id/btnSyncro"
+                android:id="@+id/btnSyncro2"
                 android:layout_width="match_parent"
                 android:layout_height="127dp"
                 android:layout_weight="1"
                 android:text="Sincronizar" />
 
             <Button
-                android:id="@+id/btnGoBack2"
+                android:id="@+id/btnGoBack3"
                 android:layout_width="match_parent"
                 android:layout_height="127dp"
                 android:layout_weight="1"

@@ -29,7 +29,4 @@ public interface CartasRepository {
 
     @Query("SELECT * FROM Cartas WHERE synced = 0")
     List<Cartas> getUnsyncedCartas();
-
-    @Query("SELECT * FROM Cartas WHERE idDuelista = :idCartas")
-    List<Cartas> getCartasByDuelistaId(int idCartas);
 }
