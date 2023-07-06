@@ -14,7 +14,6 @@ public class Duelista {
     private boolean syncro; //true en el mockapi - false no esta en mockapi
 
     public String nombreDuelista;
-    public String idCartitas;
 
     public int getIdDuelista() {
         return idDuelista;
@@ -40,11 +39,4 @@ public class Duelista {
         this.nombreDuelista = nombreDuelista;
     }
 
-    public String getIdCartitas() {
-        return idCartitas;
-    }
-
-    public void setIdCartitas(String idCartitas) {
-        this.idCartitas = idCartitas;
-    }
 }

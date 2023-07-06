@@ -21,6 +21,8 @@ public class Cartas {
     public String latitud;
     public String longitud;
 
+    public int idDuelista;
+
     public int getIdCartas() {
         return idCartas;
     }
@@ -85,4 +87,11 @@ public class Cartas {
         this.longitud = longitud;
     }
 
+    public int getIdDuelista() {
+        return idDuelista;
+    }
+
+    public void setIdDuelista(int idDuelista) {
+        this.idDuelista = idDuelista;
+    }
 }
