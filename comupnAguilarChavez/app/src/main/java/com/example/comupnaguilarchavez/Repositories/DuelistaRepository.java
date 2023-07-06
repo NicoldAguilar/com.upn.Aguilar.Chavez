@@ -15,17 +15,17 @@ public interface DuelistaRepository {
     @Query("SELECT * FROM Duelista")
     List<Duelista> getAllUser();
     @Insert
-    void create(Duelista pokemon);
+    void create(Duelista duelista);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<Duelista> pokemones);
+    void insertAll(List<Duelista> duelista);
     @Update
-    void updateCuenta(Duelista pokemon);
+    void updateCuenta(Duelista duelista);
 
     @Query("SELECT MAX(idDuelista) FROM Duelista")
     int getLastId();
     @Query("SELECT * FROM Duelista WHERE idDuelista = :duelistaId")
-    Duelista findPokemonById(int duelistaId);
+    Duelista findDuelistById(int duelistaId);
 
     @Query("SELECT * FROM Duelista WHERE synced = 0")
     List<Duelista> getUnsyncedPokemones();

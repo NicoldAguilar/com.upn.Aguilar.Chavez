@@ -78,12 +78,16 @@ public class ListaDuelistasActivity extends AppCompatActivity {
 
             }
         });
+
+        int position = getIntent().getIntExtra("position", 0);
+
         //Manda la lista desde base de datos para mostrarse
         AppDatabase db = AppDatabase.getInstance(context);
         DuelistaRepository repository = db.duelistaRepository();
-        List<Duelista> duel = repository.getAllUser();
+        Duelista duel = repository.findDuelistById(position);
+        List<Duelista> dueli = repository.getAllUser();
         Log.i("MAIN_APP: DB", new Gson().toJson(duel));
-        mAdapter.setDuelista(duel);
+        mAdapter.setDuelista(dueli);
         mAdapter.notifyDataSetChanged();
 
         btnActualizar.setOnClickListener(new View.OnClickListener() {
@@ -104,31 +108,30 @@ public class ListaDuelistasActivity extends AppCompatActivity {
         btnSyncro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(int i=0; i<duel.size(); i++){
-                    if (!duel.get(i).isSyncro()){
+                if (!duel.isSyncro()){
 
-                        Duelista aux = new Duelista();
-                        aux.setNombreDuelista(duel.get(i).getNombreDuelista());
-                        aux.setSyncro(true);
+                    Duelista aux = new Duelista();
+                    aux.setNombreDuelista(duel.getNombreDuelista());
+                    aux.setSyncro(true);
 
-                        mRetrofit = RetrofitU.build();
-                        DuelistaService service = mRetrofit.create(DuelistaService.class);
-                        Call<Duelista> call = service.create(aux);
+                    mRetrofit = RetrofitU.build();
+                    DuelistaService service = mRetrofit.create(DuelistaService.class);
+                    Call<Duelista> call = service.create(aux);
 
-                        call.enqueue(new Callback<Duelista>() {
-                            @Override
-                            public void onResponse(Call<Duelista> call, Response<Duelista> response) {
-                                Intent intent =  new Intent(ListaDuelistasActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
+                    call.enqueue(new Callback<Duelista>() {
+                        @Override
+                        public void onResponse(Call<Duelista> call, Response<Duelista> response) {
+                            Log.i("MAIN_APP",  String.valueOf(response.code()));
+                            Intent intent =  new Intent(ListaDuelistasActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
 
-                            @Override
-                            public void onFailure(Call<Duelista> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<Duelista> call, Throwable t) {
 
-                            }
-                        });
-                    }
+                        }
+                    });
                 }
             }
         });
@@ -154,8 +157,6 @@ public class ListaDuelistasActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private boolean isNetworkConnected() {
