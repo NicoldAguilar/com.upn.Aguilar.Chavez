@@ -21,7 +21,7 @@ public class Cartas {
     public String latitud;
     public String longitud;
 
-    public int idDuelista;
+    public int idDuelista; //foreing key
 
     public int getIdCartas() {
         return idCartas;

@@ -22,12 +22,12 @@ public interface DuelistaRepository {
     @Update
     void updateCuenta(Duelista pokemon);
 
-    @Query("SELECT MAX(idDuelista) FROM Pokemones")
+    @Query("SELECT MAX(idDuelista) FROM Duelista")
     int getLastId();
-    @Query("SELECT * FROM Pokemones WHERE id = :pokemonId")
-    Pokemon findPokemonById(int pokemonId);
+    @Query("SELECT * FROM Duelista WHERE idDuelista = :duelistaId")
+    Duelista findPokemonById(int duelistaId);
 
-    @Query("SELECT * FROM Pokemones WHERE synced = 0")
-    List<Pokemon> getUnsyncedPokemones();
+    @Query("SELECT * FROM Duelista WHERE synced = 0")
+    List<Duelista> getUnsyncedPokemones();
 
 }

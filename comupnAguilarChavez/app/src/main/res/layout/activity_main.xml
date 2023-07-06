@@ -18,7 +18,7 @@
         app:layout_constraintVertical_bias="0.195" />
 
     <Button
-        android:id="@+id/btnRegistrarP"
+        android:id="@+id/btnRegistrarD"
         android:layout_width="132dp"
         android:layout_height="71dp"
         android:text="Registrar Duelista"
@@ -30,7 +30,7 @@
         app:layout_constraintVertical_bias="0.348" />
 
     <Button
-        android:id="@+id/btnMisPokemones"
+        android:id="@+id/btnMisDuelistas"
         android:layout_width="163dp"
         android:layout_height="65dp"
         android:text="Duelistas Registrados"
