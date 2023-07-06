@@ -53,12 +53,16 @@ public class RegistroDuelistaActivity extends AppCompatActivity {
                 Intent intent =  new Intent(RegistroDuelistaActivity.this, ListaDuelistasActivity.class);
                 startActivity(intent);
                 finish();
-
-
             }
         });
 
-
-
+        btnGoingBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(RegistroDuelistaActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }

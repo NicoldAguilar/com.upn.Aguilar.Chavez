@@ -35,6 +35,12 @@
                 android:layout_weight="1"
                 android:text="Regresar" />
 
+            <Button
+                android:id="@+id/btnSyncro"
+                android:layout_width="match_parent"
+                android:layout_height="127dp"
+                android:layout_weight="1"
+                android:text="Sincronizar" />
         </LinearLayout>
 
     </LinearLayout>
