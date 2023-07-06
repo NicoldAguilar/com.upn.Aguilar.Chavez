@@ -1,7 +1,6 @@
 package com.example.comupnaguilarchavez;
 
 import androidx.fragment.app.FragmentActivity;
-
 import android.os.Bundle;
 
 import com.example.comupnaguilarchavez.BD.AppDatabase;
@@ -74,4 +73,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sydney).title("Has encontrado: " + carta.getNombre()));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
 }
