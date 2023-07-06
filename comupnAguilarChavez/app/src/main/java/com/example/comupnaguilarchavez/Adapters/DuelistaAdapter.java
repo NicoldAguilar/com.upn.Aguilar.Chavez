@@ -2,7 +2,6 @@ package com.example.comupnaguilarchavez.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +10,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.comupnaguilarchavez.Entities.Duelista;
+import com.example.comupnaguilarchavez.ListaCartasActivity;
 import com.example.comupnaguilarchavez.R;
+import com.example.comupnaguilarchavez.RegistroCartasActivity;
 
 import java.util.List;
 
@@ -47,8 +47,7 @@ public class DuelistaAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        Duelista mov = new Duelista();
-        mov = items.get(position);
+        Duelista mov = items.get(position);
 
         if(mov == null) return;
 
@@ -63,7 +62,7 @@ public class DuelistaAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View view) {
                 Intent intent =  new Intent(context, RegistroCartasActivity.class);
-                intent.putExtra("position", item.getId());
+                intent.putExtra("position", mov.getIdDuelista());
                 context.startActivity(intent);
 
             }
@@ -73,6 +72,9 @@ public class DuelistaAdapter extends RecyclerView.Adapter {
         btnShowCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent =  new Intent(context, ListaCartasActivity.class);
+                intent.putExtra("position", mov.getIdDuelista());
+                context.startActivity(intent);
 
             }
         });
