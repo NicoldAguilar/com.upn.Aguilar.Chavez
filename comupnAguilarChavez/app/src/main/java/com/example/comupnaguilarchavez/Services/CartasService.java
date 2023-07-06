@@ -25,6 +25,9 @@ public interface CartasService {
     @POST("Cartas")
     Call<Cartas> create(@Body Cartas cartas);
 
+    @POST("Cartas")
+    Call<Cartas> createDuelistaCarta(@Body List<Cartas> cartas);
+
     @PUT("Cartas/{id}")
     Call<Cartas> update(@Path("id") int id, @Body Cartas cartas);
 

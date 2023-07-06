@@ -10,6 +10,10 @@ import com.example.comupnaguilarchavez.Entities.Cartas;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
+
 @Dao
 public interface CartasRepository {
     @Query("SELECT * FROM Cartas")

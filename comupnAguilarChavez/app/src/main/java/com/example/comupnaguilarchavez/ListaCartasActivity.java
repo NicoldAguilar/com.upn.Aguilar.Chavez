@@ -114,6 +114,7 @@ import retrofit2.Retrofit;
                 for(int i=0; i<cartas.size(); i++){
                     if (!cartas.get(i).isSynced()){
 
+
                         Cartas aux = new Cartas();
                         aux.setNombre(cartas.get(i).getNombre());
                         aux.setPuntosAtaque(cartas.get(i).getPuntosAtaque());
@@ -121,8 +122,8 @@ import retrofit2.Retrofit;
                         aux.setFoto(cartas.get(i).getFoto());
                         aux.setLatitud(cartas.get(i).getLatitud());
                         aux.setLongitud(cartas.get(i).getLongitud());
-
                         aux.setSynced(true);
+
 
                         mRetrofit = RetrofitU.build();
                         CartasService service = mRetrofit.create(CartasService.class);

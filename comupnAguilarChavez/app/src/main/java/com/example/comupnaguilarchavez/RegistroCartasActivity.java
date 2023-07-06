@@ -33,6 +33,8 @@ import com.example.comupnaguilarchavez.Services.CartasService;
 import com.example.comupnaguilarchavez.Utilities.RetrofitU;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -96,10 +98,10 @@ public class RegistroCartasActivity extends AppCompatActivity {
 
                 //Crear un service del repository
                 AppDatabase database = AppDatabase.getInstance(context);
-                CartasRepository pokeRepository = database.cartitasRepository();
+                CartasRepository cartasRepository = database.cartitasRepository();
 
                 // Obtener el último ID registrado en la base de datos para crear uno nuevo
-                int lastId = pokeRepository.getLastId();
+                int lastId = cartasRepository.getLastId();
 
                 //Crear un nuevo pokemon
                 Cartas cartas = new Cartas();
@@ -113,7 +115,7 @@ public class RegistroCartasActivity extends AppCompatActivity {
                 cartas.setLongitud(longitud+"");
                 cartas.setSynced(false);
 
-                pokeRepository.create(cartas); //enviando pokemon a la BD
+                cartasRepository.create(cartas);
 
                 //Ir al mostrar luego de registrar
                 Intent intent =  new Intent(RegistroCartasActivity.this, ListaCartasActivity.class);

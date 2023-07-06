@@ -58,8 +58,8 @@ public class CartasAdapter extends RecyclerView.Adapter {
         ImageView imageView = view.findViewById(R.id.imageView);
 
         tvNameC.setText(item.nombre);
-        tvAtaqueC.setText(item.puntosAtaque);
-        tvDefensaC.setText(item.puntosDefensa);
+        tvAtaqueC.setText(item.puntosAtaque+"");
+        tvDefensaC.setText(item.puntosDefensa+"");
 
         Picasso.get().load(item.getFoto())
                 .resize(300, 400) //tamaño específico
