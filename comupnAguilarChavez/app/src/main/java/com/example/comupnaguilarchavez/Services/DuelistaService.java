@@ -16,18 +16,18 @@ import retrofit2.http.Query;
 
 public interface DuelistaService {
     @GET("Duelista")
-    Call<List<Duelista>> getAllUser(@Query("limit") int limit, @Query("page") int page);
+    Call<List<Duelista>> getAllDuelistas(@Query("limit") int limit, @Query("page") int page);
 
     @GET("Duelista/{id}")
-    Call<Duelista> findUser(@Path("id") int id);
+    Call<Duelista> findDuelista(@Path("id") int id);
 
-    @POST("Pokemones")
+    @POST("Duelista")
     Call<Duelista> create(@Body Duelista duelista);
 
-    @PUT("Pokemones/{id}")
+    @PUT("Duelista/{id}")
     Call<Duelista> update(@Path("id") int id, @Body Duelista duelista);
 
-    @DELETE("Pokemones/{id}")
+    @DELETE("Duelista/{id}")
     Call<Void> delete(@Path("id") int id);
 
     @POST("image")

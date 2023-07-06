@@ -13,7 +13,7 @@ import java.util.List;
 @Dao
 public interface DuelistaRepository {
     @Query("SELECT * FROM Duelista")
-    List<Duelista> getAllUser();
+    List<Duelista> getAllDuelistas();
     @Insert
     void create(Duelista duelista);
 

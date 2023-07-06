@@ -26,7 +26,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="127dp"
                 android:layout_weight="1"
-                android:text="Actualizar" />
+                android:text="Actualizar"
+                app:iconTint="#CC7070"
+                app:rippleColor="#D67474" />
 
             <Button
                 android:id="@+id/btnGoBack2"

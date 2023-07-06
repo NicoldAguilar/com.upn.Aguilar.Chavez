@@ -15,10 +15,10 @@ import retrofit2.http.Query;
 
 public interface CartasService {
     @GET("Cartas")
-    Call<List<Cartas>> getAllUser(@Query("limit") int limit, @Query("page") int page);
+    Call<List<Cartas>> getAllCartas(@Query("limit") int limit, @Query("page") int page);
 
     @GET("Cartas/{id}")
-    Call<Cartas> findUser(@Path("id") int id);
+    Call<Cartas> findCartas(@Path("id") int id);
 
     @POST("Cartas")
     Call<Cartas> create(@Body Cartas cartas);

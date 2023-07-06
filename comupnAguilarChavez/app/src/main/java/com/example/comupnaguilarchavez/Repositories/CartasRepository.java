@@ -13,14 +13,14 @@ import java.util.List;
 @Dao
 public interface CartasRepository {
     @Query("SELECT * FROM Cartas")
-    List<Cartas> getAllUser();
+    List<Cartas> getAllCartas();
     @Insert
-    void create(Cartas pokemon);
+    void create(Cartas carta);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Cartas> cartass);
     @Update
-    void updateCuenta(Cartas cartass);
+    void updateCartas(Cartas cartass);
 
     @Query("SELECT MAX(idCartas) FROM Cartas")
     int getLastId();
@@ -28,7 +28,7 @@ public interface CartasRepository {
     Cartas findCartaById(int cartasId);
 
     @Query("SELECT * FROM Cartas WHERE synced = 0")
-    List<Cartas> getUnsyncedPokemones();
+    List<Cartas> getUnsyncedCartas();
 
     @Query("SELECT * FROM Cartas WHERE idDuelista = :idCartas")
     List<Cartas> getCartasByDuelistaId(int idCartas);

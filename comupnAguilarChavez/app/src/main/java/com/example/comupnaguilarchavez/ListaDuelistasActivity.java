@@ -79,15 +79,12 @@ public class ListaDuelistasActivity extends AppCompatActivity {
             }
         });
 
-        int position = getIntent().getIntExtra("position", 0);
-
         //Manda la lista desde base de datos para mostrarse
         AppDatabase db = AppDatabase.getInstance(context);
         DuelistaRepository repository = db.duelistaRepository();
-        Duelista duel = repository.findDuelistById(position);
-        List<Duelista> dueli = repository.getAllUser();
+        List<Duelista> duel = repository.getAllDuelistas();
         Log.i("MAIN_APP: DB", new Gson().toJson(duel));
-        mAdapter.setDuelista(dueli);
+        mAdapter.setDuelista(duel);
         mAdapter.notifyDataSetChanged();
 
         btnActualizar.setOnClickListener(new View.OnClickListener() {
@@ -105,36 +102,39 @@ public class ListaDuelistasActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         btnSyncro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!duel.isSyncro()){
+                for(int i=0; i<duel.size(); i++){
+                    if (!duel.get(i).isSyncro()){
 
-                    Duelista aux = new Duelista();
-                    aux.setNombreDuelista(duel.getNombreDuelista());
-                    aux.setSyncro(true);
+                        Duelista aux = new Duelista();
+                        aux.setNombreDuelista(duel.get(i).getNombreDuelista());
+                        aux.setSyncro(true);
 
-                    mRetrofit = RetrofitU.build();
-                    DuelistaService service = mRetrofit.create(DuelistaService.class);
-                    Call<Duelista> call = service.create(aux);
+                        mRetrofit = RetrofitU.build();
+                        DuelistaService service = mRetrofit.create(DuelistaService.class);
+                        Call<Duelista> call = service.create(aux);
 
-                    call.enqueue(new Callback<Duelista>() {
-                        @Override
-                        public void onResponse(Call<Duelista> call, Response<Duelista> response) {
-                            Log.i("MAIN_APP",  String.valueOf(response.code()));
-                            Intent intent =  new Intent(ListaDuelistasActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
+                        call.enqueue(new Callback<Duelista>() {
+                            @Override
+                            public void onResponse(Call<Duelista> call, Response<Duelista> response) {
+                                Intent intent =  new Intent(ListaDuelistasActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
 
-                        @Override
-                        public void onFailure(Call<Duelista> call, Throwable t) {
+                            @Override
+                            public void onFailure(Call<Duelista> call, Throwable t) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
             }
         });
+
         mRvLista.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -157,6 +157,13 @@ public class ListaDuelistasActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+        int position = getIntent().getIntExtra("position", 0);
+
+        //Manda la lista desde base de datos para mostrarse
+
     }
 
     private boolean isNetworkConnected() {
@@ -170,7 +177,7 @@ public class ListaDuelistasActivity extends AppCompatActivity {
         db.clearAllTables();
 
         DuelistaService service = mRetrofit.create(DuelistaService.class);
-        service.getAllUser(20, nextPage).enqueue(new Callback<List<Duelista>>() {
+        service.getAllDuelistas(20, nextPage).enqueue(new Callback<List<Duelista>>() {
             @Override
             public void onResponse(Call<List<Duelista>> call, Response<List<Duelista>> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -180,7 +187,7 @@ public class ListaDuelistasActivity extends AppCompatActivity {
                     repository.insertAll(response.body());
 
                     // Actualiza los datos en el adaptador y notifica los cambios
-                    List<Duelista> newData = repository.getAllUser();
+                    List<Duelista> newData = repository.getAllDuelistas();
                     mAdapter.setDuelista(newData);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -201,7 +208,7 @@ public class ListaDuelistasActivity extends AppCompatActivity {
 
         DuelistaService service = mRetrofit.create(DuelistaService.class);
         Log.i("MAIN_APP  Page:", String.valueOf(nextPage));
-        service.getAllUser(100, nextPage).enqueue(new Callback<List<Duelista>>() { // Cambia el número de registros por página según tus necesidades
+        service.getAllDuelistas(100, nextPage).enqueue(new Callback<List<Duelista>>() { // Cambia el número de registros por página según tus necesidades
             @Override
             public void onResponse(Call<List<Duelista>> call, Response<List<Duelista>> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -224,4 +231,6 @@ public class ListaDuelistasActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
